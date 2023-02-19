@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"/>
+    <title>Cinepolis</title>
+</head>
+<style>
+    body {
+        padding-top: 60px;
+        background-color: #4680fe;
+        color: rgb(69, 70, 71);
+        background-image: url(../static/img/cinepolis.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    h1, h2, h3 {
+        color: aliceblue;
+    }
+
+    .thumbnails {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+</style>
+<body>
+    <!-- vista que tenga un titulo centrado 'Cinepolis', dos columnas, en la primera tiene el titulo de 'Entradas' el input nombre, cantidad compradores, tarjeta cineco (checkbox), cantidad de boletas, en la segunda tiene el titulo de 'Entradas' y el valor a pagar. al finl hay 2 botones, procesar y salir -->
+    <div class="container">
+        <h2 class="text-center">Cinepolis</h2>
+        <form action="/procesar" method="post">
+            <ul class="thumbnails">
+                <li class="span6">
+                    <fieldset>
+                        <legend><h3>Entradas</h3></legend>
+                        <div class="control-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" value="{{ datos['nombre'] }}">
+                        </div>
+                        <div class="control-group">
+                            <label for="compradores">Cantidad compradores</label>
+                            <input type="number" id="compradores" name="compradores" value="{{ datos['compradores'] }}">
+                        </div>
+                        <div class="control-group">
+                            Tarjeta Cineco <input type='checkbox' tabindex='20' name='tarjeta' id="cineco" value='Cineco' {% if datos['tarjeta'] %} checked {% endif %}>
+                        </div>
+                        <div class="control-group">
+                            <label for="boletas">Cantidad de boletas</label>
+                            <input type="number" id="boletas" name="boletas" value="{{ datos['boletas'] }}">
+                        </div>
+                    </fieldset>
+                </li>
+                <li class="span6">
+                    <fieldset>
+                        <legend><h3>Salidas</h3></legend>
+                        <div class="control-group">
+                            <label for="pagar">Valor a pagar</label>
+                            <input type="number" id="pagar" name="pagar" disabled value="{{ datos['total'] }}">
+                        </div>
+                    </fieldset>
+                </li>
+            </ul>
+            {% if datos['errores'] %}
+                {% for error in datos['errores'] %}
+                <div class="alert alert-error">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            {% if datos['exito'] %}
+                {% for exito in datos['exito'] %}
+                    <div class="alert alert-success">{{ exito }}</div>
+                {% endfor %}
+            {% endif %}
+            <ul class="thumbnails">
+                <li class="span12 text-center">
+                    <fieldset>
+                        <legend><h3>Acciones</h3></legend>
+                        <button type="submit" class="btn btn-default btn-primary">
+                            Procesar
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                            Salir
+                        </button>
+                    </fieldset>
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+</html>

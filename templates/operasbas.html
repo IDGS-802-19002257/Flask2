@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <form class="from-horizontal" name="form1" action="/resultado" method="post">
+                <div class="control-group">
+                    <label for="txtNum1" class="control-label">Numero 1</label>
+                    <div class="controls">
+                        <input type="text" name="txtNum1" placeholder="Numero 1" value="">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="txtNum2" class="control-label">Numero 1</label>
+                    <div class="controls">
+                        <input type="text" name="txtNum2" placeholder="Numero 1" value="">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-default btn-primary">
+                            <i class="icon-book icon-white"></i>Calcular
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

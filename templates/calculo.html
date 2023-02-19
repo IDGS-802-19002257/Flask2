@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Resultados</h1>
+    <p>Máximo: {{ max_num }}</p>
+    <p>Mínimo: {{ min_num }}</p>
+    <p>Promedio: {{ avg_num }}</p>
+        {% if num_count %}
+    <p>Números repetidos:</p>
+    <ul>
+        {% for num, count in num_count.items() %}
+            {% if count > 1 %}
+                <li>El número {{ num }} aparecio {{ count }} veces.</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+<div class="col-xs-6">
+    {%from "_macros.html" import render_field%}
+    <form action="/alumnos" method="post">
+        {{render_field(form.matricula)}}
+        {{render_field(form.nombre)}}
+        {{render_field(form.apaterno)}}
+        {{render_field(form.amaterno)}}
+        {{render_field(form.email)}}
+        <div class="custom-control">
+            <input type="submit" value="Registrar">
+        </div>
+    </form>
+</div>
+
+<div class="col-xs-6">
+    <h3>Matricula: {{matricula}}</h3>
+    <h3>Nombre: {{nombre}}</h3>
+</div>
+{%endblock%}

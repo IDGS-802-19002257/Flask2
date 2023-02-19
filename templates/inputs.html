@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Ingrese números</h1>
+    <form method="POST" action="/calculo">
+        {% for i in range(num) %}
+        <label for="input{{ i }}">Ingrese el número {{ i+1 }}:</label>
+        <input type="number" id="input{{ i }}" name="input{{ i }}">
+        <br>
+        {% endfor %}
+        <input type="number" id="num" name="num" value="{{ num }}" style="display:none;">
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock %}
