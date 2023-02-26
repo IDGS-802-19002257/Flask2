@@ -1,0 +1,34 @@
+body {
+    background: rgb(242, 245, 223);
+    /* Cambia los colores según tus necesidades */
+}
+
+.tr-head {
+    background: #dff0d8;
+}
+
+.navbar {
+    background: rgb(212, 65, 65);
+}
+
+.navbar .nav-link:not(.active) {
+    color: white;
+    /* blanco para fondo rojo intenso */
+    color: black;
+    /* negro para fondo rojo claro */
+}
+
+.navbar .nav-link:visited {
+    color: white;
+    /* blanco para contraste */
+    color: #333;
+    /* gris oscuro para contraste */
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+    color: white;
+    /* blanco para contraste y relación con la identidad visual */
+    color: gold;
+    /* dorado para relación con la identidad visual */
+}

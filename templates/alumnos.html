@@ -4,6 +4,7 @@
 <div class="col-xs-6">
     {%from "_macros.html" import render_field%}
     <form action="/alumnos" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         {{render_field(form.matricula)}}
         {{render_field(form.nombre)}}
         {{render_field(form.apaterno)}}

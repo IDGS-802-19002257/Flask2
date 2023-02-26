@@ -1,0 +1,58 @@
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+{%from "_macros.html" import render_field%}
+<div class="card">
+    <div class="card-header">
+        <h4>Traductor <i class="fa-solid fa-language"></i></h4>
+    </div>
+    <div class="card-body">
+        <h5>Registrar palabra</h5>
+        <form action="/traductor" method="post" class="row g-3">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="col-md-5">
+                <!-- <label for="inputEsp" class="visually-hidden">Palabra en español</label>
+                <input type="text" class="form-control" id="esp" placeholder="Palabra en español"> -->
+                {{ render_field(form.esp, input_class='form-control', label_class='visually-hidden', placeholder='Palabra en español') }}
+            </div>
+            <div class="col-md-5">
+                <!-- <label for="inputEng" class="visually-hidden">Palabra en inglés</label>
+                <input type="text" class="form-control" id="eng" placeholder="Palabra en inglés"> -->
+                {{ render_field(form.eng, input_class='form-control', label_class='visually-hidden', placeholder='Palabra en inglés') }}
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+            </div>
+        </form>
+        <hr>
+        <h5>Traducir</h5>
+        <form action="/traductor/busqueda" method="post" class="text-center">
+            <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
+            <div class="form-check form-check-inline mb-2">
+                <input class="form-check-input" type="radio" name="idioma" id="espR" value="esp" checked>
+                <label class="form-check-label" for="esp">Español</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="idioma" id="engR" value="eng">
+                <label class="form-check-label" for="eng">Inglés</label>
+            </div>
+            <div class="row g-3">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="col-md-5">
+                    <label for="palabra" class="visually-hidden">Palabra</label>
+                    <input type="text" class="form-control" name="palabra" id="palabra" placeholder="Palabra">
+                </div>
+                <div class="col-md-5">
+                    <label for="traduccion" class="visually-hidden">Traducción</label>
+                    <input type="text" class="form-control-plaintext" name="palabra" id="traduccion" placeholder="Traducción" value="{{ resultado }}" disabled>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+{% endblock %}

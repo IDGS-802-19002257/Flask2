@@ -1,0 +1,1 @@
+rojo:red;red:net;agua:water;pastilla:pill;
