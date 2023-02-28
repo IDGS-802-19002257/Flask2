@@ -38,3 +38,47 @@ class LoginForm(Form):
         validators.DataRequired(message='El usuario es requerido'),
         validators.length(min=4, max=10, message='long de campo 4 min and 5 max')
     ])
+
+class ResistenciasForm(Form):
+    banda1 = SelectField('Banda 1', choices=[
+        ('black', 'Negro'),
+        ('brown', 'Marrón'),
+        ('red', 'Rojo'),
+        ('orange', 'Naranja'),
+        ('yellow', 'Amarillo'),
+        ('green', 'Verde'),
+        ('blue', 'Azul'),
+        ('purple', 'Violeta'),
+        ('gray', 'Gris'),
+    ])
+    banda2 = SelectField('Banda 2', choices=[
+        ('black', 'Negro'),
+        ('brown', 'Marrón'),
+        ('red', 'Rojo'),
+        ('orange', 'Naranja'),
+        ('yellow', 'Amarillo'),
+        ('green', 'Verde'),
+        ('blue', 'Azul'),
+        ('purple', 'Violeta'),
+        ('gray', 'Gris'),
+    ])
+    multiplicador = SelectField('Multiplicador', choices=[
+        ('black', 'Negro'),
+        ('brown', 'Marrón'),
+        ('red', 'Rojo'),
+        ('orange', 'Naranja'),
+        ('yellow', 'Amarillo'),
+        ('green', 'Verde'),
+        ('blue', 'Azul'),
+        ('purple', 'Violeta'),
+        ('gray', 'Gris'),
+        ('gold', 'Dorado'),
+        ('silver', 'Plateado')
+    ])
+    tolerancia = SelectField('Multiplicador', choices=[
+        ('brown', 'Marrón'),
+        ('red', 'Rojo'),
+        ('gold', 'Dorado'),
+        ('silver', 'Plateado'),
+        ('na', 'Sin banda')
+    ])

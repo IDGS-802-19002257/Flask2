@@ -112,6 +112,31 @@ def busqueda():
                     break
     return redirect(url_for('traductor', resultado=resultado))
 
+@app.route('/resistencias', methods = ['GET', 'POST'])
+def resistencias():
+    resistencias_forms = forms.ResistenciasForm(request.form)
+    if request.method == 'GET':
+        datos = {
+            'c1': { 'text':'n/a', 'color':'' },
+            'c2': { 'text':'n/a', 'color':'' },
+            'c3': { 'text':'n/a', 'color':'' },
+            'c4': { 'text':'n/a', 'color':'' },
+            'val': { 'text':'n/a', 'color':'' },
+            'min': { 'text':'n/a', 'color':'' },
+            'max': { 'text':'n/a', 'color':'' },
+        }
+    elif request.method == 'POST':
+        datos = {
+            'c1': { 'text':'n/a', 'color':'' },
+            'c2': { 'text':'n/a', 'color':'' },
+            'c3': { 'text':'n/a', 'color':'' },
+            'c4': { 'text':'n/a', 'color':'' },
+            'val': { 'text':'n/a', 'color':'' },
+            'min': { 'text':'n/a', 'color':'' },
+            'max': { 'text':'n/a', 'color':'' },
+        }
+    return render_template('resistencias.html', resistencias_forms=resistencias_forms, datos = datos)
+
 if __name__ == '__main__':
     csrf.init_app(app)
     app.run(debug=True,port=3000)

@@ -1,0 +1,47 @@
+{% extends 'layouts/layout-2.html' %}
+
+{% block content %}
+{%from "_macros.html" import render_field2 %}
+<div class="card">
+    <div class="card-header">
+        <h4>Resistencias <i class="fa-solid fa-plug-circle-bolt"></i></h4>
+    </div>
+    <div class="card-body">
+        <div class="text-center">
+            <img src="static\img\tabla_resistencia.png" alt="" style="max-height: 600px;">
+        </div>
+        <form action="" method="post">
+            {{ render_field2(resistencias_forms.banda1) }}
+            {{ render_field2(resistencias_forms.banda2) }}
+            {{ render_field2(resistencias_forms.multiplicador) }}
+            {{ render_field2(resistencias_forms.tolerancia) }}
+            <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Color 1</th>
+                    <th>Color 2</th>
+                    <th>Color 3</th>
+                    <th>Color 4</th>
+                    <th>Valor</th>
+                    <th>Minimo</th>
+                    <th>Maximo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ datos['c1']['text'] }}</td>
+                    <td>{{ datos['c2']['text'] }}</td>
+                    <td>{{ datos['c3']['text'] }}</td>
+                    <td>{{ datos['c4']['text'] }}</td>
+                    <td>{{ datos['val']['text'] }}</td>
+                    <td>{{ datos['min']['text'] }}</td>
+                    <td>{{ datos['max']['text'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
