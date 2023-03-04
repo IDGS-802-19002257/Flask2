@@ -10,7 +10,8 @@
         <div class="text-center">
             <img src="static\img\tabla_resistencia.png" alt="" style="max-height: 600px;">
         </div>
-        <form action="" method="post">
+        <form action="/resistencias" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             {{ render_field2(resistencias_forms.banda1) }}
             {{ render_field2(resistencias_forms.banda2) }}
             {{ render_field2(resistencias_forms.multiplicador) }}
@@ -32,13 +33,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ datos['c1']['text'] }}</td>
-                    <td>{{ datos['c2']['text'] }}</td>
-                    <td>{{ datos['c3']['text'] }}</td>
-                    <td>{{ datos['c4']['text'] }}</td>
-                    <td>{{ datos['val']['text'] }}</td>
-                    <td>{{ datos['min']['text'] }}</td>
-                    <td>{{ datos['max']['text'] }}</td>
+                    <td style="background-color: {{ datos['c1']['color'] }}; color: {{ datos['c1']['text_color'] }};">{{ datos['c1']['text'] }}</td>
+                    <td style="background-color: {{ datos['c2']['color'] }}; color: {{ datos['c2']['text_color'] }};">{{ datos['c2']['text'] }}</td>
+                    <td style="background-color: {{ datos['c3']['color'] }}; color: {{ datos['c3']['text_color'] }};">{{ datos['c3']['text'] }}</td>
+                    <td style="background-color: {{ datos['c4']['color'] }}; color: {{ datos['c4']['text_color'] }};">{{ datos['c4']['text'] }}</td>
+                    <td style="background-color: {{ datos['val']['color'] }}; color: {{ datos['val']['text_color'] }};">{{ datos['val']['text'] }}</td>
+                    <td style="background-color: {{ datos['min']['color'] }}; color: {{ datos['min']['text_color'] }};">{{ datos['min']['text'] }}</td>
+                    <td style="background-color: {{ datos['max']['color'] }}; color: {{ datos['max']['text_color'] }};">{{ datos['max']['text'] }}</td>
                 </tr>
             </tbody>
         </table>

@@ -126,14 +126,136 @@ def resistencias():
             'max': { 'text':'n/a', 'color':'' },
         }
     elif request.method == 'POST':
+        colors = {
+            'black': {
+                'color': 'Negro',
+                'texto': 'white',
+                'banda1': 0,
+                'banda2': 0,
+                'multiplicador': 1,
+                'tolerancia': 0
+            },
+            'brown': {
+                'color': 'Marrón',
+                'texto': 'white',
+                'banda1': 1,
+                'banda2': 1,
+                'multiplicador': 10,
+                'tolerancia': 1
+            },
+            'red': {
+                'color': 'Rojo',
+                'texto': 'white',
+                'banda1': 2,
+                'banda2': 2,
+                'multiplicador': 100,
+                'tolerancia': 2
+            },
+            'orange': {
+                'color': 'Naranja',
+                'texto': 'black',
+                'banda1': 3,
+                'banda2': 3,
+                'multiplicador': 1000,
+                'tolerancia': 0
+            },
+            'yellow': {
+                'color': 'Amarillo',
+                'texto': 'black',
+                'banda1': 4,
+                'banda2': 4,
+                'multiplicador': 10000,
+                'tolerancia': 0
+            },
+            'green': {
+                'color': 'Verde',
+                'texto': 'white',
+                'banda1': 5,
+                'banda2': 5,
+                'multiplicador': 100000,
+                'tolerancia': 0
+            },
+            'blue': {
+                'color': 'Azul',
+                'texto': 'white',
+                'banda1': 6,
+                'banda2': 6,
+                'multiplicador': 1000000,
+                'tolerancia': 0
+            },
+            'purple': {
+                'color': 'Violeta',
+                'texto': 'white',
+                'banda1': 7,
+                'banda2': 7,
+                'multiplicador': 10000000,
+                'tolerancia': 0
+            },
+            'gray': {
+                'color': 'Gris',
+                'texto': 'white',
+                'banda1': 8,
+                'banda2': 8,
+                'multiplicador': 100000000,
+                'tolerancia': 0
+            },
+            'white': {
+                'color': 'Blanco',
+                'texto': 'black',
+                'banda1': 9,
+                'banda2': 9,
+                'multiplicador': 1000000000,
+                'tolerancia': 0
+            },
+            'gold': {
+                'color': 'Dorado',
+                'texto': 'black',
+                'banda1': -1,
+                'banda2': -1,
+                'multiplicador': 0.1,
+                'tolerancia': 5
+            },
+            'silver': {
+                'color': 'Plateado',
+                'texto': 'black',
+                'banda1': -2,
+                'banda2': -2,
+                'multiplicador': 0.01,
+                'tolerancia': 10
+            }
+        }
+
+        banda1 = str(request.form.get('banda1'))
+        if banda1 in colors:
+            b1 = colors[banda1]
+
+        banda2 = str(request.form.get('banda2'))
+        if banda2 in colors:
+            b2 = colors[banda2]
+
+        multiplicador = str(request.form.get('multiplicador'))
+        if multiplicador in colors:
+            m = colors[multiplicador]
+
+        tolerancia = str(request.form.get('tolerancia'))
+        if tolerancia in colors:
+            t = colors[tolerancia]
+
+        p1 = str(b1['banda1']) + str(b2['banda2'])
+
+        val = int(p1) * m['multiplicador']
+        mini = val - val / 100 * t['tolerancia']
+        maxi = val + val / 100 * t['tolerancia']
+
+        
         datos = {
-            'c1': { 'text':'n/a', 'color':'' },
-            'c2': { 'text':'n/a', 'color':'' },
-            'c3': { 'text':'n/a', 'color':'' },
-            'c4': { 'text':'n/a', 'color':'' },
-            'val': { 'text':'n/a', 'color':'' },
-            'min': { 'text':'n/a', 'color':'' },
-            'max': { 'text':'n/a', 'color':'' },
+            'c1': { 'text':b1['color'], 'color':banda1, 'text_color':b1['texto'] },
+            'c2': { 'text':b2['color'], 'color':banda2, 'text_color':b2['texto'] },
+            'c3': { 'text':m['color'], 'color':multiplicador, 'text_color':m['texto'] },
+            'c4': { 'text':t['color'], 'color':tolerancia, 'text_color':t['texto'] },
+            'val': { 'text':val, 'color':'white' },
+            'min': { 'text':mini, 'color':'white' },
+            'max': { 'text':maxi, 'color':'white' },
         }
     return render_template('resistencias.html', resistencias_forms=resistencias_forms, datos = datos)
 
