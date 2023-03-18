@@ -50,6 +50,7 @@ class ResistenciasForm(Form):
         ('blue', 'Azul'),
         ('purple', 'Violeta'),
         ('gray', 'Gris'),
+        ('white', 'Blanco'),
     ])
     banda2 = SelectField('Banda 2', render_kw={"class": "form-control form-select mb-2"}, choices=[
         ('black', 'Negro'),
@@ -61,6 +62,7 @@ class ResistenciasForm(Form):
         ('blue', 'Azul'),
         ('purple', 'Violeta'),
         ('gray', 'Gris'),
+        ('white', 'Blanco'),
     ])
     multiplicador = SelectField('Multiplicador', render_kw={"class": "form-control form-select mb-2"}, choices=[
         ('black', 'Negro'),
@@ -72,6 +74,7 @@ class ResistenciasForm(Form):
         ('blue', 'Azul'),
         ('purple', 'Violeta'),
         ('gray', 'Gris'),
+        ('white', 'Blanco'),
         ('gold', 'Dorado'),
         ('silver', 'Plateado')
     ])

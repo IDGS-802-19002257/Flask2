@@ -1,0 +1,64 @@
+.table .black {
+    background-color: black;
+    color: white;
+}
+
+.table .brown {
+    background-color: brown;
+    color: white;
+}
+
+.table .red {
+    background-color: red;
+    color: white;
+}
+
+.table .orange {
+    background-color: orange;
+    color: black;
+}
+
+.table .yellow {
+    background-color: yellow;
+    color: black;
+}
+
+.table .green {
+    background-color: green;
+    color: white;
+}
+
+.table .blue {
+    background-color: blue;
+    color: white;
+}
+
+.table .purple {
+    background-color: purple;
+    color: white;
+}
+
+.table .gray {
+    background-color: gray;
+    color: white;
+}
+
+.table .white {
+    background-color: white;
+    color: black;
+}
+
+.table .gold {
+    background-image: radial-gradient(circle at center, #ffd700, #c49f00);
+    color: black;
+}
+
+.table .silver {
+    background-image: radial-gradient(circle at center, #cfcaca, rgb(133, 131, 131));
+    color: black;
+}
+
+.table .sin {
+    background: #f5c592;
+    color: black;
+}

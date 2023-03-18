@@ -1,0 +1,12 @@
+black;Negro;0;0;1;0
+brown;Marrón;1;1;10;1
+red;Rojo;2;2;100;2
+orange;Naranja;3;3;1000;0
+yellow;Amarillo;4;4;10000;0
+green;Verde;5;5;100000;0
+blue;Azul;6;6;1000000;0
+purple;Violeta;7;7;10000000;0
+gray;Gris;8;8;100000000;0
+white;Blanco;9;9;1000000000;0
+gold;Dorado;-1;-1;0.1;5
+silver;Plateado;-2;-2;0.01;10

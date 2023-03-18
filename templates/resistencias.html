@@ -19,7 +19,7 @@
             <button type="submit" class="btn btn-primary mb-3">Guardar</button>
         </form>
 
-        <table class="table">
+        <table class="table text-center">
             <thead>
                 <tr>
                     <th>Color 1</th>
@@ -33,13 +33,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="background-color: {{ datos['c1']['color'] }}; color: {{ datos['c1']['text_color'] }};">{{ datos['c1']['text'] }}</td>
-                    <td style="background-color: {{ datos['c2']['color'] }}; color: {{ datos['c2']['text_color'] }};">{{ datos['c2']['text'] }}</td>
-                    <td style="background-color: {{ datos['c3']['color'] }}; color: {{ datos['c3']['text_color'] }};">{{ datos['c3']['text'] }}</td>
-                    <td style="background-color: {{ datos['c4']['color'] }}; color: {{ datos['c4']['text_color'] }};">{{ datos['c4']['text'] }}</td>
-                    <td style="background-color: {{ datos['val']['color'] }}; color: {{ datos['val']['text_color'] }};">{{ datos['val']['text'] }}</td>
-                    <td style="background-color: {{ datos['min']['color'] }}; color: {{ datos['min']['text_color'] }};">{{ datos['min']['text'] }}</td>
-                    <td style="background-color: {{ datos['max']['color'] }}; color: {{ datos['max']['text_color'] }};">{{ datos['max']['text'] }}</td>
+                    <td class="{{ datos['c1']['clase'] }}">{{ datos['c1']['text'] }}</td>
+                    <td class="{{ datos['c2']['clase'] }}">{{ datos['c2']['text'] }}</td>
+                    <td class="{{ datos['c3']['clase'] }}">{{ datos['c3']['text'] }}</td>
+                    <td class="{{ datos['c4']['clase'] }}">{{ datos['c4']['text'] }}</td>
+                    <td class="{{ datos['val']['clase'] }}">{{ datos['val']['text'] }}</td>
+                    <td class="{{ datos['min']['clase'] }}">{{ datos['min']['text'] }}</td>
+                    <td class="{{ datos['max']['clase'] }}">{{ datos['max']['text'] }}</td>
                 </tr>
             </tbody>
         </table>

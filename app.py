@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response, flash, redirect, url_for
 from flask_wtf.csrf import CSRFProtect
+import json
 
 import forms
 
@@ -116,114 +117,33 @@ def busqueda():
 def resistencias():
     resistencias_forms = forms.ResistenciasForm(request.form)
     if request.method == 'GET':
-        datos = {
-            'c1': { 'text':'n/a', 'color':'' },
-            'c2': { 'text':'n/a', 'color':'' },
-            'c3': { 'text':'n/a', 'color':'' },
-            'c4': { 'text':'n/a', 'color':'' },
-            'val': { 'text':'n/a', 'color':'' },
-            'min': { 'text':'n/a', 'color':'' },
-            'max': { 'text':'n/a', 'color':'' },
-        }
-    elif request.method == 'POST':
-        colors = {
-            'black': {
-                'color': 'Negro',
-                'texto': 'white',
-                'banda1': 0,
-                'banda2': 0,
-                'multiplicador': 1,
-                'tolerancia': 0
-            },
-            'brown': {
-                'color': 'Marrón',
-                'texto': 'white',
-                'banda1': 1,
-                'banda2': 1,
-                'multiplicador': 10,
-                'tolerancia': 1
-            },
-            'red': {
-                'color': 'Rojo',
-                'texto': 'white',
-                'banda1': 2,
-                'banda2': 2,
-                'multiplicador': 100,
-                'tolerancia': 2
-            },
-            'orange': {
-                'color': 'Naranja',
-                'texto': 'black',
-                'banda1': 3,
-                'banda2': 3,
-                'multiplicador': 1000,
-                'tolerancia': 0
-            },
-            'yellow': {
-                'color': 'Amarillo',
-                'texto': 'black',
-                'banda1': 4,
-                'banda2': 4,
-                'multiplicador': 10000,
-                'tolerancia': 0
-            },
-            'green': {
-                'color': 'Verde',
-                'texto': 'white',
-                'banda1': 5,
-                'banda2': 5,
-                'multiplicador': 100000,
-                'tolerancia': 0
-            },
-            'blue': {
-                'color': 'Azul',
-                'texto': 'white',
-                'banda1': 6,
-                'banda2': 6,
-                'multiplicador': 1000000,
-                'tolerancia': 0
-            },
-            'purple': {
-                'color': 'Violeta',
-                'texto': 'white',
-                'banda1': 7,
-                'banda2': 7,
-                'multiplicador': 10000000,
-                'tolerancia': 0
-            },
-            'gray': {
-                'color': 'Gris',
-                'texto': 'white',
-                'banda1': 8,
-                'banda2': 8,
-                'multiplicador': 100000000,
-                'tolerancia': 0
-            },
-            'white': {
-                'color': 'Blanco',
-                'texto': 'black',
-                'banda1': 9,
-                'banda2': 9,
-                'multiplicador': 1000000000,
-                'tolerancia': 0
-            },
-            'gold': {
-                'color': 'Dorado',
-                'texto': 'black',
-                'banda1': -1,
-                'banda2': -1,
-                'multiplicador': 0.1,
-                'tolerancia': 5
-            },
-            'silver': {
-                'color': 'Plateado',
-                'texto': 'black',
-                'banda1': -2,
-                'banda2': -2,
-                'multiplicador': 0.01,
-                'tolerancia': 10
+        cookies = request.cookies.get('resistencia')
+        if cookies:
+            datos = json.loads(cookies)
+        else:
+            datos = {
+                'c1': { 'text':'n/a', 'color':'' },
+                'c2': { 'text':'n/a', 'color':'' },
+                'c3': { 'text':'n/a', 'color':'' },
+                'c4': { 'text':'n/a', 'color':'' },
+                'val': { 'text':'n/a', 'color':'' },
+                'min': { 'text':'n/a', 'color':'' },
+                'max': { 'text':'n/a', 'color':'' },
             }
-        }
+    elif request.method == 'POST':
+        with open('colores.txt', 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        colors = {}
+        for line in lines:
+            parts = line.strip().split(';')
+            color = {
+                'color': parts[1],
+                'banda1': int(parts[2]),
+                'banda2': int(parts[3]),
+                'multiplicador': float(parts[4]),
+                'tolerancia': int(parts[5]),
+            }
+            colors[parts[0]] = color
 
         banda1 = str(request.form.get('banda1'))
         if banda1 in colors:
@@ -240,23 +160,30 @@ def resistencias():
         tolerancia = str(request.form.get('tolerancia'))
         if tolerancia in colors:
             t = colors[tolerancia]
+        else:
+            t = {
+                'tolerancia': 20,
+                'color': 'Sin Tolerancia',
+            }
+            tolerancia = 'sin'
 
         p1 = str(b1['banda1']) + str(b2['banda2'])
 
         val = int(p1) * m['multiplicador']
         mini = val - val / 100 * t['tolerancia']
         maxi = val + val / 100 * t['tolerancia']
-
         
         datos = {
-            'c1': { 'text':b1['color'], 'color':banda1, 'text_color':b1['texto'] },
-            'c2': { 'text':b2['color'], 'color':banda2, 'text_color':b2['texto'] },
-            'c3': { 'text':m['color'], 'color':multiplicador, 'text_color':m['texto'] },
-            'c4': { 'text':t['color'], 'color':tolerancia, 'text_color':t['texto'] },
-            'val': { 'text':val, 'color':'white' },
-            'min': { 'text':mini, 'color':'white' },
-            'max': { 'text':maxi, 'color':'white' },
+            'c1': { 'text':b1['color'], 'clase': banda1 },
+            'c2': { 'text':b2['color'], 'clase': banda2 },
+            'c3': { 'text':m['color'], 'clase': multiplicador },
+            'c4': { 'text':t['color'], 'clase': tolerancia },
+            'val': { 'text':val, 'clase':'white' },
+            'min': { 'text':mini, 'clase':'white' },
+            'max': { 'text':maxi, 'clase':'white' },
         }
+        resp = make_response(render_template('resistencias.html', resistencias_forms=resistencias_forms, datos=datos))
+        resp.set_cookie('resistencia', json.dumps(datos))
     return render_template('resistencias.html', resistencias_forms=resistencias_forms, datos = datos)
 
 if __name__ == '__main__':
